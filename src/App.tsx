@@ -6,6 +6,12 @@ import { Cart } from "./Cart"
 import { Header } from "./shared/Header"
 import { OrderSummary } from "./OrderSummary"
 
+// App accepts no props and contains no business logic.
+// The only thing it does is render the layout.
+
+// Most of our components will output some layout -
+// this is the first thing we can test.
+
 export const App = () => {
   return (
     <>

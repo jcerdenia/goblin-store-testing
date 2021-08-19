@@ -5,6 +5,12 @@ import { App } from "./App"
 import { CartProvider } from "./CartContext"
 import "./index.css"
 
+// Application entry point. This is where
+// where render our component tree into HTML.
+
+// CartProvider: Manages cart state. It persists data in localStorage.
+// BrowserRouter: Allows using routing across our app.
+
 ReactDOM.render(
   <React.StrictMode>
     <CartProvider>
