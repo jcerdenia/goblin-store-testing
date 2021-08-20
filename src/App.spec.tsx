@@ -42,22 +42,22 @@ describe("Routing", () => {
   })
 
   it("renders checkout page on '/cart'", () => {
-    const { container } = renderWithRouter(() => <App/>, "/cart")
-    expect(container.innerHTML).toMatch("Cart")
-  })
-
-  it("renders checkout page on '/cart'", () => {
-    const { container } = renderWithRouter(() => <App/>, "/cart")
+    const { container } = renderWithRouter(() => <App />, "/cart")
     expect(container.innerHTML).toMatch("Cart")
   })
 
   it("renders checkout page on '/checkout'", () => {
-    const { container } = renderWithRouter(() => <App/>, "/checkout")
+    const { container } = renderWithRouter(() => <App />, "/checkout")
     expect(container.innerHTML).toMatch("Checkout")
   })
 
   it("renders checkout page on '/order'", () => {
-    const { container } = renderWithRouter(() => <App/>, "/order")
+    const { container } = renderWithRouter(() => <App />, "/order")
     expect(container.innerHTML).toMatch("Order Summary")
+  })
+
+  it("renders a nonexistent route correctly", () => {
+    const { container } = renderWithRouter(() => <App />, "/route")
+    expect(container.innerHTML).toMatch("Page not found")
   })
 })
