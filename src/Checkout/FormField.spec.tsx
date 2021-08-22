@@ -2,11 +2,13 @@ import React from "react"
 import { render, fireEvent } from "@testing-library/react"
 import { FormField } from "./FormField"
 
+// Renders label, input, and an error message if passed an error object.
+// Also supports normalization to limit the length of the input value or format it in some way.
+// e.g. CVV and credit card number.
+
 describe("FormField", () => {
   it("renders correctly", () => {
-    const { getByLabelText } = render(
-      <FormField label="Foo label" name="foo" />
-    )
+    const { getByLabelText } = render(<FormField label="Foo label" name="foo" />)
     const input = getByLabelText("Foo label:")
     expect(input).toBeInTheDocument()
     expect(input).not.toHaveClass("is-error")
@@ -15,33 +17,23 @@ describe("FormField", () => {
 
   describe("with error", () => {
     it("renders error message", () => {
-      const { getByText } = render(
-        <FormField
-          label="Foo label"
-          name="foo"
-          errors={{ message: "Example error" }}
-        />
-      )
+      const error = { message: "Example error " }
+      const { getByText } = render(<FormField label="Foo label" name="foo" errors={error} />)
       expect(getByText("Error: Example error")).toBeInTheDocument()
     })
   })
 
   describe("on change", () => {
     it("normalizes the input", () => {
-      const { getByLabelText } = render(
-        <FormField
-          label="Foo label"
-          name="foo"
-          errors={{ message: "Example error" }}
-          normalize={(value:string) => value.toUpperCase()}
-        />
-      )
+      const { getByLabelText } = render(<FormField 
+        label="Foo label" 
+        name="foo" 
+        errors={{ message: "Example error " }} 
+        normalize={(value: string) => value.toUpperCase()}
+      />)
 
-      const input = getByLabelText(
-        "Foo label:"
-      ) as HTMLInputElement
+      const input = getByLabelText("Foo label:") as HTMLInputElement
       fireEvent.change(input, { target: { value: "test" } })
-
       expect(input.value).toEqual("TEST")
     })
   })
